@@ -1,0 +1,16 @@
+$(document).ready(function(){
+            $(".sidebar-btn").click(function(){
+            	if($(".sidebar").css('width')=="250px"){
+					$(".sidebar").addClass('sidebar-phone-min-width')
+					$(".main-content").addClass('main-content-min-width')
+					$(".min-width-hidden-item").addClass('hidden')
+					$(".menu-btn").addClass('min-width-sidebar-a')
+            	}
+            	else{
+					$(".sidebar").removeClass('sidebar-phone-min-width')
+					$(".main-content").removeClass('main-content-min-width')
+					$(".min-width-hidden-item").removeClass('hidden')
+					$(".menu-btn").removeClass('min-width-sidebar-a')
+            	}
+            });
+        });

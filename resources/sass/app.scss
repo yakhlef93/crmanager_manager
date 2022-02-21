@@ -1,0 +1,15 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+$primary: #2788d2;
+$secondary: #5f6b6d;
+$light: #ecfbff;
+$info: #69eadc;
+$danger: #fd625e;
+$warning: #f2c80f;
+$success: #01b8aa;
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
