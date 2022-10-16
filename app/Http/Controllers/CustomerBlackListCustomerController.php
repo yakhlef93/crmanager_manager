@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerBlackListCustomer;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerBlackListCustomerController extends Controller
@@ -15,7 +16,7 @@ class CustomerBlackListCustomerController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            $blacklistcustomers = Customer::WithFilters()->WithPagination();
+            $blacklistcustomers = CustomerBlackListCustomer::WithFilters()->WithPagination();
             return [ 'blacklistcustomers'=>$blacklistcustomers];
         }
         return view('blacklistcustomers.index');
