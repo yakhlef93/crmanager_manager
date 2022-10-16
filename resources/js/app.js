@@ -4,49 +4,30 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-require('./bootstrap');
+ require('./bootstrap');
 
-window.Vue = require('vue').default;
-
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-//import 'bootstrap/dist/css/bootstrap.css'
-
-// Vue Select
-import vSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
-
-Vue.component('v-select', vSelect)
-
-// Flash
-
-window.events = new Vue();
-
-window.flash = function (message, level = 'success') {
-    window.events.$emit('flash', { message, level });
-};
+ window.Vue = require('vue');
+ 
+ import Vue from 'vue'
+ import BootstrapVue from 'bootstrap-vue'
+ Vue.use(BootstrapVue)
+ 
+ import vSelect from 'vue-select'
+ Vue.component('v-select', vSelect)
+ 
+ window.events = new Vue();
+ 
+ window.flash = function (message, level = 'success') {
+     window.events.$emit('flash', { message, level });
+ };
 
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+Vue.component('customers', require('./components/customers/Customers.vue').default);
+Vue.component('new-customer', require('./components/customers/NewCustomer.vue').default);
+Vue.component('edit-customer', require('./components/customers/EditCustomer.vue').default);
+Vue.component('show-customer', require('./components/customers/ShowCustomer.vue').default);
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.component('flash', require('./components/flash/Flash.vue').default);
 
 const app = new Vue({
     el: '#app',
