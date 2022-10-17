@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerBlackListCustomer;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+
+use App\Http\Resources\CustomerBlackListCustomerResource;
 
 class CustomerBlackListCustomerController extends Controller
 {
@@ -12,13 +15,15 @@ class CustomerBlackListCustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()   
     {
-        if (request()->wantsJson()) {
-            $blacklistcustomers = Customer::WithFilters()->WithPagination();
-            return [ 'blacklistcustomers'=>$blacklistcustomers];
-        }
-        return view('blacklistcustomers.index');
+        // if (request()->wantsJson()) {
+            // $blacklistcustomers = CustomerBlackListCustomer::all();
+            // return [ 'blacklistcustomers'=>$blacklistcustomers];
+        // }
+        // return view('blacklistcustomers.index');
+        $blacklistcustomers = CustomerBlackListCustomer::WithFilters()->WithPagination();
+        return CustomerBlackListCustomerResource::collection($blacklistcustomers);
     }
 
     /**
@@ -40,12 +45,13 @@ class CustomerBlackListCustomerController extends Controller
     public function store(Request $request)
     {
         $customer = Customer::where('account_id', $request->request_code)->first();
-        CustomerBlackListCustomer::create(
+        $blacklistcustomer = CustomerBlackListCustomer::create(
             array_merge(
                     $request->all(),
                     ['customer_id' => $customer->id]
                 )
         );
+        return new CustomerBlackListCustomerResource($blacklistcustomer);
     }
 
     /**
@@ -79,7 +85,7 @@ class CustomerBlackListCustomerController extends Controller
      */
     public function update(Request $request, CustomerBlackListCustomer $customerBlackListCustomer)
     {
-        //
+        //$customerBlackListCustomer->update($request->all())
     }
 
     /**
@@ -88,8 +94,10 @@ class CustomerBlackListCustomerController extends Controller
      * @param  \App\Models\CustomerBlackListCustomer  $customerBlackListCustomer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CustomerBlackListCustomer $customerBlackListCustomer)
+    public function destroy(Request $request)
     {
-        //
+        $customer = Customer::where('account_id', $request->request_code)->first();
+        if($customer)
+            CustomerBlackListCustomer::where('cin_number',$request->cin_number)->where('customer_id', $customer->id)->delete();
     }
 }

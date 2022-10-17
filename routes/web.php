@@ -47,4 +47,6 @@ Route::middleware(['auth'])->group(function () {
 
 });
     	
-Route::post('/blacklistcustomers/store', [App\Http\Controllers\CustomerBlackListCustomer::class, 'store'])->name('blacklistcustomers.store');
+// Route::get('/blacklistcustomers/store', [App\Http\Controllers\CustomerBlackListCustomerController::class, 'store'])->name('blacklistcustomers.store');
+// Route::get('/blacklistcustomers/index', [App\Http\Controllers\CustomerBlackListCustomerController::class, 'index'])->name('blacklistcustomers.index');
+// Route::get('/blacklistcustomers/update', [App\Http\Controllers\CustomerBlackListCustomerController::class, 'update'])->name('blacklistcustomers.update');
