@@ -24,6 +24,7 @@ class CustomerBlackListCustomerController extends Controller
         // return view('blacklistcustomers.index');
 
         $blacklistcustomers = CustomerBlackListCustomer::WithPagination();
+        $blacklistcustomers->load('customer');
         return CustomerBlackListCustomerResource::collection($blacklistcustomers);
     }
 
