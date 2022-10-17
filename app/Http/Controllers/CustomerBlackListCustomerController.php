@@ -22,9 +22,7 @@ class CustomerBlackListCustomerController extends Controller
             // return [ 'blacklistcustomers'=>$blacklistcustomers];
         // }
         // return view('blacklistcustomers.index');
-
-        $blacklistcustomers = CustomerBlackListCustomer::WithPagination();
-        $blacklistcustomers->load('customer');
+        $blacklistcustomers = CustomerBlackListCustomer::WithFilters()->WithPagination();
         return CustomerBlackListCustomerResource::collection($blacklistcustomers);
     }
 

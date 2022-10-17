@@ -23,15 +23,16 @@ class CustomerBlackListCustomer extends Model
         'customer_id',
     ];
 
+    protected $with = ['customer'];
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
     public function scopeWithFilters($query)
     {
-        return $query->when(request('customers_ids'),function($query){
-                $query->whereIn('customer_id',request('customers_ids'));
-            })->latest();
+        return $query->where('name','like', '%'.request('filter_string').'%')
+                ->orWhere('cin_number','like', '%'.request('filter_string').'%')
+                ->orWhere('drive_licence_number','like', '%'.request('filter_string').'%')->latest();
     }
     public function scopeWithPagination($query)
     {
