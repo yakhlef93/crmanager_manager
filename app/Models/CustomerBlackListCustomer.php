@@ -33,4 +33,11 @@ class CustomerBlackListCustomer extends Model
                 $query->whereIn('customer_id',request('customers_ids'));
             })->latest();
     }
+    public function scopeWithPagination($query)
+    {
+        if (request('per_page') == -1)
+            return $query->paginate(CustomerBlackListCustomer::count());
+        else
+            return $query->paginate(request('per_page', 15));
+    }
 }

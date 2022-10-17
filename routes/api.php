@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::apiRessource('blacklistcustomers', App\Http\Controllers\CustomerBlackListCustomerController::class);
+Route::resource('blacklistcustomers', App\Http\Controllers\CustomerBlackListCustomerController::class);
+Route::delete('/api/blacklistcustomers/delete', [App\Http\Controllers\CustomerBlackListCustomerController::class,'delete']);
