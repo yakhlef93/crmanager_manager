@@ -127,6 +127,11 @@ export default {
                 //     label: 'Avatar',
                 // }, 
                 {
+                    key: 'account_id',
+                    label: 'Nom',
+                    sortable: true
+                }, 
+                {
                     key: 'last_name',
                     label: 'Nom',
                     sortable: true

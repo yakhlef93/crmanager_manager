@@ -17,12 +17,9 @@ class CustomerBlackListCustomerController extends Controller
      */
     public function index()   
     {
-        // if (request()->wantsJson()) {
-            // $blacklistcustomers = CustomerBlackListCustomer::all();
-            // return [ 'blacklistcustomers'=>$blacklistcustomers];
-        // }
-        // return view('blacklistcustomers.index');
-        $blacklistcustomers = CustomerBlackListCustomer::WithFilters()->WithPagination();
+        $blacklistcustomers = CustomerBlackListCustomer::whereHas('customer', function($query){
+            $query->where('global_black_list','enabled');
+        })->WithFilters()->WithPagination();
         return CustomerBlackListCustomerResource::collection($blacklistcustomers);
     }
 

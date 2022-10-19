@@ -89,6 +89,14 @@ class CustomerController extends Controller
     {
         $customer->update($request->all());
     }
+    public function remote_update(Request $request)
+    {
+        $customer = Customer::where('account_id', $request->request_code)->first();
+        if($customer)
+            $customer->update($request->all());
+
+        return response()->noContent();
+    }
 
     /**
      * Remove the specified resource from storage.
