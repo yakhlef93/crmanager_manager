@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customers/{customer}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customers.edit');
     Route::patch('/customers/{customer}', [App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
     Route::get('/customers/{customer}', [App\Http\Controllers\CustomerController::class, 'show'])->name('customers.show');
+    
+    Route::get('/black_list_customers', [App\Http\Controllers\CustomerBlackListCustomerController::class, 'index_blade'])->name('blacklistcustomers.black_list_customers');
 
 });
     	

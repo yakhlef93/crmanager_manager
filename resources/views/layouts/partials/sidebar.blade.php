@@ -25,6 +25,12 @@
                 <span class="min-width-hidden-item">Customers </span> <i class="fa-solid fa-user"></i>
             </a>
         </li>
+        <li class="item" id="black_list">
+            <a href="{{ route('blacklistcustomers.black_list_customers') }}"
+                class="text-white menu-btn {{ request()->is('*black_list*') ? 'active' : 'menu-btn-hover'}}">
+                <span class="min-width-hidden-item">Black Customers </span> <i class="fa-solid fa-user"></i>
+            </a>
+        </li>
         {{-- Admin Section --}}
         {{-- @if(auth()->user()->hasRole('admin')) --}}
         {{-- <li class="item" id="products">

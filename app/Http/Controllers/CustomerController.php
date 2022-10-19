@@ -95,6 +95,27 @@ class CustomerController extends Controller
         if($customer)
             $customer->update($request->all());
 
+        if($request->has('customers')){
+            $black_customers = json_decode($request->customers);
+            foreach($black_customers as $black_customer){
+                $blacklistcustomer = CustomerBlackListCustomer::create([
+                            'name' => $black_customer->FullName,
+                            'gender' => $black_customer->gender,
+                            'birthdate' => $black_customer->birthdate,
+                            'phone_number' => $black_customer->phone_number,
+                            'city' => $black_customer->city,
+                            'address' => $black_customer->address,
+                            'cin_number' => $black_customer->cin_number,
+                            'cin_expiry_date' => $black_customer->cin_expiry_date,
+                            'drive_licence_number' => $black_customer->drive_licence_number,
+                            'drive_licence_expiry_date' => $black_customer->drive_licence_expiry_date,
+                            'comment' => $black_customer->comment,
+                            'customer_id' => $customer->id,
+                        ]);
+            }
+        }
+            
+
         return response()->noContent();
     }
 

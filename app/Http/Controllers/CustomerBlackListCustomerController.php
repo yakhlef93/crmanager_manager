@@ -22,6 +22,14 @@ class CustomerBlackListCustomerController extends Controller
         })->WithFilters()->WithPagination();
         return CustomerBlackListCustomerResource::collection($blacklistcustomers);
     }
+    public function index_blade()   
+    {
+        if(request()->wantsJson()){
+            $blacklistcustomers = CustomerBlackListCustomer::WithPagination();
+            return CustomerBlackListCustomerResource::collection($blacklistcustomers);
+        }
+        return view('black_list_customers.index');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +48,7 @@ class CustomerBlackListCustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $customer = Customer::where('account_id', $request->request_code)->first();
         $blacklistcustomer = CustomerBlackListCustomer::create(
             array_merge(
@@ -93,8 +101,13 @@ class CustomerBlackListCustomerController extends Controller
      */
     public function destroy(Request $request)
     {
-        $customer = Customer::where('account_id', $request->request_code)->first();
+        if($request->has('request_code'))
+            $customer = Customer::where('account_id', $request->request_code)->first();
+        else
+            $customer = Customer::find($request->customer_id);
         if($customer)
             CustomerBlackListCustomer::where('cin_number',$request->cin_number)->where('customer_id', $customer->id)->delete();
+
+        return response()->noContent();
     }
 }

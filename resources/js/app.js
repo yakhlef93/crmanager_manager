@@ -29,6 +29,8 @@ Vue.component('show-customer', require('./components/customers/ShowCustomer.vue'
 
 Vue.component('flash', require('./components/flash/Flash.vue').default);
 
+Vue.component('black-customers', require('./components/black_list_customers/BlackCustomers.vue').default);
+
 const app = new Vue({
     el: '#app',
 });
