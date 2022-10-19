@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerBlackListCustomer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
